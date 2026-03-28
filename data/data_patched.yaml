@@ -1,0 +1,24 @@
+names:
+- Bearish Marubozu
+- Bullish Marubozu
+- Dragonfly Doji
+- Four price doji
+- Gravenstone Doji
+- Hammer
+- Hanging Man
+- High Wave
+- Inverted Hammer
+- Long-Legged Doji
+- Shooting Star
+- Standard Doji
+- spinning top
+nc: 13
+roboflow:
+  license: CC BY 4.0
+  project: candlestick-pattern-detector
+  url: https://universe.roboflow.com/anonimo-3nggp/candlestick-pattern-detector/dataset/1
+  version: 1
+  workspace: anonimo-3nggp
+test: C:\Users\Dell\Downloads\CV Material\CV Project\data\test\images
+train: C:\Users\Dell\Downloads\CV Material\CV Project\data\train\images
+val: C:\Users\Dell\Downloads\CV Material\CV Project\data\valid\images

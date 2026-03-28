@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 13
+names: ['Bearish Marubozu', 'Bullish Marubozu', 'Dragonfly Doji', 'Four price doji', 'Gravenstone Doji', 'Hammer', 'Hanging Man', 'High Wave', 'Inverted Hammer', 'Long-Legged Doji', 'Shooting Star', 'Standard Doji', 'spinning top']
+
+roboflow:
+  workspace: anonimo-3nggp
+  project: candlestick-pattern-detector
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/anonimo-3nggp/candlestick-pattern-detector/dataset/1
