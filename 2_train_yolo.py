@@ -37,22 +37,34 @@ def find_yaml(data_dir):
 
 def patch_yaml_paths(yaml_path):
     """
-    Roboflow sometimes writes relative paths. This ensures absolute paths
-    are used so training works regardless of where you call the script from.
+    Roboflow writes paths like '../train/images' relative to the YAML file.
+    Rather than trusting those relative paths, we build correct absolute paths
+    directly from DATA_DIR where we know the data was extracted.
     """
     with open(yaml_path, "r") as f:
         cfg = yaml.safe_load(f)
 
-    base = str(Path(yaml_path).parent.resolve())
+    data_root = Path(DATA_DIR).resolve()
 
-    for key in ["train", "val", "test"]:
-        if key in cfg and not os.path.isabs(cfg[key]):
-            cfg[key] = os.path.join(base, cfg[key])
+    # Map Roboflow split names to folder names on disk
+    split_map = {"train": "train", "val": "valid", "test": "test"}
+    for key, folder in split_map.items():
+        candidate = data_root / folder / "images"
+        if candidate.exists():
+            cfg[key] = str(candidate)
+        elif key in cfg:
+            # keep original if folder doesn't exist (e.g., no test split)
+            raw = cfg[key]
+            if raw and not os.path.isabs(raw):
+                cfg[key] = str((Path(yaml_path).parent / raw).resolve())
 
-    patched_path = yaml_path.replace(".yaml", "_patched.yaml")
+    patched_path = str(Path(yaml_path).parent / "data_patched.yaml")
     with open(patched_path, "w") as f:
         yaml.dump(cfg, f)
 
+    print(f"  train : {cfg.get('train')}")
+    print(f"  val   : {cfg.get('val')}")
+    print(f"  test  : {cfg.get('test')}")
     return patched_path
 
 
