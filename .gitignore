@@ -1,0 +1,48 @@
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ───────────────────────────────────────
+.env
+.venv
+venv/
+env/
+.conda/
+
+# ── Dataset & large binary files ──────────────────────────────
+data/              # downloaded by 1_download_dataset.py
+*.zip
+*.tar.gz
+*.rar
+
+# ── Model weights & training outputs ──────────────────────────
+models/            # trained weights saved here
+outputs/           # evaluation outputs, plots
+runs/              # YOLO training runs
+*.pt
+*.onnx
+*.engine
+*.pkl
+*.h5
+
+# ── Jupyter / IDE ─────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+.idea/
+.vscode/
+*.swp
+
+# ── OS junk ───────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs & temp ───────────────────────────────────────────────
+*.log
+*.tmp
