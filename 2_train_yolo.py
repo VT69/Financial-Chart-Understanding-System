@@ -15,10 +15,10 @@ from ultralytics import YOLO
 DATA_DIR        = "./data"
 RUNS_DIR        = "./runs"
 MODEL_SIZE      = "yolov8s"      # n=nano, s=small, m=medium. Start with 's' for balance.
-EPOCHS          = 50
+EPOCHS          = 150
 IMAGE_SIZE      = 640
 BATCH_SIZE      = 16             # Reduce to 8 if you get OOM errors
-PATIENCE        = 10             # Early stopping patience
+PATIENCE        = 25             # Early stopping patience
 DEVICE          = "0" if torch.cuda.is_available() else "cpu"
 PRETRAINED      = True           # Use ImageNet pretrained weights
 
