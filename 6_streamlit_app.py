@@ -258,9 +258,11 @@ def plot_candlestick(df, ticker, n_candles=60):
     if "vol_regime" in recent.columns:
         colors = {0: "rgba(0,200,0,0.07)", 1: "rgba(180,180,0,0.07)", 2: "rgba(220,0,0,0.07)"}
         for i, (idx, row) in enumerate(recent.iterrows()):
+            vr = row.get("vol_regime", 1)
+            vol_val = int(vr.iloc[0] if hasattr(vr, "iloc") else vr)
             fig.add_vrect(
                 x0=idx, x1=recent.index[min(i + 1, len(recent) - 1)],
-                fillcolor=colors.get(int(row.get("vol_regime", 1)), "transparent"),
+                fillcolor=colors.get(vol_val, "transparent"),
                 line_width=0,
             )
     fig.update_layout(
