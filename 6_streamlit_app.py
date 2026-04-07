@@ -812,10 +812,12 @@ def tab_live_demo(ticker, conf_thr, period, n_candles):
         if df_live is not None:
             last  = df_live.iloc[-1]
             prev  = df_live.iloc[-2]
-            close = float(last["Close"].squeeze())
-            delta = close - float(prev["Close"].squeeze())
-            pct   = delta / float(prev["Close"].squeeze()) * 100
-            regime_live   = int(last.get("vol_regime", 1))
+            def _sf(x): return float(x.iloc[0] if hasattr(x, "iloc") else x)
+            def _si(x): return int(x.iloc[0] if hasattr(x, "iloc") else x)
+            close = _sf(last["Close"])
+            delta = close - _sf(prev["Close"])
+            pct   = delta / _sf(prev["Close"]) * 100
+            regime_live   = _si(last.get("vol_regime", 1))
             regime_short  = ["Low Vol", "Med Vol", "High Vol"][regime_live]
             regime_icon   = ["🟢", "🟡", "🔴"][regime_live]
             m1, m2, m3 = st.columns(3)
@@ -1093,7 +1095,8 @@ otal vector length: <b>64 dims</b> (13×5 = 65, truncated to 64).
             if valid:
                 with st.expander(f"{grp_name} ({len(valid)} features)"):
                     for c in valid:
-                        val = float(last_row.get(c, 0.0))
+                        v = last_row.get(c, 0.0)
+                        val = float(v.iloc[0] if hasattr(v, "iloc") else v)
                         st.markdown(f"`{c}` &nbsp;→&nbsp; **{val:.5f}**", unsafe_allow_html=True)
 
     st.markdown(f"""

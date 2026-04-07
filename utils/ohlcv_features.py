@@ -28,7 +28,7 @@ def fetch_ohlcv(ticker: str, period: str = "2y", interval: str = "1d") -> pd.Dat
     Returns:
         DataFrame with columns: Open, High, Low, Close, Volume
     """
-    df = yf.download(ticker, period=period, interval=interval, progress=False)
+    df = yf.download(ticker, period=period, interval=interval, progress=False, auto_adjust=False)
     df.dropna(inplace=True)
     df.index = pd.to_datetime(df.index)
     return df
